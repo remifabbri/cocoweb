@@ -1,0 +1,8 @@
+{
+  "name": "cocoweb",
+  "description": "Vulgarisation sur l'épidémiologie et plus particulièrement la crise du covid-19",
+  "repository": "https://github.com/remifabbri/cocoweb.git",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}
