@@ -21,7 +21,7 @@ function mainBrain(){
     var deleteHuman_FirstDay = 50;
 
     var dailyData = [];
-    
+
     for( i=0; i<180; i++){
         calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData);
     }
@@ -29,7 +29,7 @@ function mainBrain(){
     console.log(dailyData);
 
     let balise_nombre_mort = document.querySelector("#total_death"); 
-    balise_nombre_mort.innerHTML = 'zeefzefzefezfzefzefzf';
+    balise_nombre_mort.innerHTML = 'Construire un tableau ici';
 
     let dataGraph = {
         label: [], 
