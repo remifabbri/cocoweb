@@ -25,3 +25,19 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+input{
+  color: black; 
+}
+
+.modelisation{
+  display: flex; 
+  flex-flow: row nowrap; 
+}
+
+.modelisation form{
+  width: 20%;
+}
+
+.modelisation div{
+  width: 40%;
+}
