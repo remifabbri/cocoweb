@@ -1,9 +1,13 @@
+let allDayRule = {};
+let firstSet = false;
+
+
 var btnSubmit = document.querySelector('#btnSubmit');
 
 btnSubmit.addEventListener('click', function() {
     mainBrain(); 
 });
-
+constructCalendar();
 mainBrain(); 
 
 
@@ -14,6 +18,8 @@ function mainBrain(){
     let R0 = data.nombre_contacts*data.proba_contagion*data.infection_duration; 
     console.log(R0);
 
+
+
     let balise_p_R0 = document.querySelector("#R0"); 
     balise_p_R0.innerHTML = R0; 
     
@@ -21,6 +27,8 @@ function mainBrain(){
     var deleteHuman_FirstDay = 50;
 
     var dailyData = [];
+    
+    
 
     for( i=0; i<180; i++){
         calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData);
@@ -28,13 +36,14 @@ function mainBrain(){
     
     console.log(dailyData);
 
-    let balise_nombre_mort = document.querySelector("#total_death"); 
-    balise_nombre_mort.innerHTML = 'Construire un tableau ici';
+    // let balise_nombre_mort = document.querySelector("#total_death");
+    // balise_nombre_mort.innerHTML = 'Construire un tableau ici';
 
     let dataGraph = {
-        label: [], 
+        label: [],
         data: []
-    }; 
+    };
+
     for( let indexDaily in dailyData ){
         dataGraph.label.push( indexDaily*1),
         dataGraph.data.push(dailyData[indexDaily].deleteHumanDay)
@@ -50,7 +59,7 @@ function mainBrain(){
             labels: dataGraph.label,
             datasets: [{ 
                 data: dataGraph.data,
-                label: "Africa",
+                label: "Nombre de morts / Jours",
                 borderColor: "#3e95cd",
                 fill: false
             }
@@ -87,9 +96,133 @@ function mainBrain(){
 }
 
 
+function constructCalendar(){
+    var tableCalendar = document.querySelector("#tableCalendar");
+    tableCalendar.innerHTML = '';
+    console.log('start gen calendar allDayRule', allDayRule)
+    for(let j = 1; j<180; j++){
+
+        let CONFIG_DAY;
+        
+         
+        
+        if(!firstSet){
+            CONFIG_DAY = {
+                rule1 : false,
+                rule2 : false, 
+                rule3 : false,
+                setRule1 : false,
+                setRule2 : false,
+                setRule3 : false,
+                setRuleDay : false
+            }
+        }else{
+            console.log('config deja set'); 
+            CONFIG_DAY = {
+                ...allDayRule[j]
+            }
+        }
+        
+
+        var day_tabElem = document.createElement('div');
+        day_tabElem.setAttribute("id", `${j}`);
+        if(CONFIG_DAY.setRuleDay){
+            console.log(`${j} here`); 
+            day_tabElem.setAttribute("class", `div_tabElem daySet`);  
+        }else{
+            day_tabElem.setAttribute("class", `div_tabElem`);
+        }
+
+        var span_tabElem = document.createElement('span');
+        span_tabElem.setAttribute("class", `span_tabElem`);
+        span_tabElem.innerHTML = `J - ${j}`;
+        day_tabElem.append(span_tabElem);
+
+        day_tabElem.addEventListener( 'click', () => {
+            console.log(`jour${j}`);
+
+            var structureModal = document.querySelector('#SectionModal');
+            structureModal.removeAttribute('class', 'CloseModal'); 
+            structureModal.setAttribute('class', 'OpenModal'); 
+
+            var structModalBody = document.querySelector('#modal');
+
+            var bodyModal = document.createElement('div'); 
+            bodyModal.setAttribute('class', 'bodyModal'); 
+        
+            var closeModal = document.createElement('button');
+            closeModal.setAttribute('class', 'btnClose');
+            closeModal.setAttribute('value', `close`); 
+            bodyModal.append(closeModal); 
+            closeModal.addEventListener( 'click', () => {
+                bodyModal.remove();
+                structureModal.removeAttribute('class', 'OpenModal'); 
+                structureModal.setAttribute('class', 'CloseModal');
+                constructCalendar() 
+            })
+
+            var divRule1 = document.createElement('div');
+            divRule1.setAttribute('id', `${j}-rule1` );
+            if(CONFIG_DAY.rule1){
+                divRule1.setAttribute('class', `onRule` );
+                divRule1.setAttribute('name', `${allDayRule.rule1}` );
+            }else{
+                divRule1.setAttribute('class', `offRule` );
+                divRule1.setAttribute('name', `${allDayRule.rule1}` );
+            }
+            bodyModal.appendChild(divRule1);
+            
+            divRule1.addEventListener( 'click', () => {
+                console.log(j);
+                
+                allDayRule[j].rule1 = !allDayRule[j].rule1;
+                allDayRule[j].setRule1 = !allDayRule[j].setRule1;
+                
+                Object.keys(allDayRule[j]).forEach( keyDayRule => {
+                    if(allDayRule[j][keyDayRule] && keyDayRule !== "setRuleDay"){
+                        allDayRule[j].setRuleDay = true  
+                    }
+                })
+
+                // fonction set de l'objet 
+                let setJ = j;
+                while(setJ < 179){
+
+                    console.log("while");
+                    console.log(setJ); 
+                    allDayRule[setJ].rule1 = allDayRule[j].rule1;
+                    setJ++ 
+
+                    if(allDayRule[setJ].setRule1){
+                        return
+                    } 
+
+                    
+                }
+                console.log(allDayRule); 
+            })
+            structModalBody.append(bodyModal); 
+        }); 
+
+        //set l'objet global des régle 
+        allDayRule = {
+            ...allDayRule, 
+            [j] : CONFIG_DAY
+        };
+
+        // ajout des params si il y en as !
+        var tableCalendar = document.querySelector('#tableCalendar'); 
+        tableCalendar.append(day_tabElem);
+    }
+    firstSet = true;
+    
+}
+
 function calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData ) {
     let dataDay = {};
     let previusDay = dailyData[dailyData.length - 1];
+
+    // if nombre de malade ayant besoin de soin > 7000 alors Death_Rate = 5%;
 
     // condition jour 0 or not
     if(dailyData.length === 0) {

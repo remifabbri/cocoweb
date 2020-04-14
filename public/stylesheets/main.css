@@ -29,15 +29,159 @@ input{
   color: black; 
 }
 
+
+.containerCc{
+  position: relative;
+}
+
 .modelisation{
   display: flex; 
-  flex-flow: row nowrap; 
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 66%;
+  margin: 0 auto;
 }
 
-.modelisation form{
-  width: 20%;
+.j0{
+   
+  height:462px;
+  width: 25%;
+  border: 1px solid white;
 }
 
-.modelisation div{
-  width: 40%;
+#tableCalendar{
+  display: flex; 
+  flex-flow: row wrap; 
+  justify-content: space-between;
+  width: 50%; 
+  height : 466px;
+  overflow-y: scroll;
+  padding: 5px; 
+}
+
+
+
+
+.BlockR0{
+  position: absolute;
+  bottom: -25px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  height: 50px;
+  width: auto; 
+  padding: 10px;
+  font-size: 20px; 
+  background-color : cornflowerblue;
+  border-radius: 5px;
+
+}
+
+
+.onRule{
+  height: 20px;
+  width: 20px; 
+  background-color: greenyellow; 
+}
+
+.offRule{
+  height: 20px;
+  width: 20px; 
+  background-color: red; 
+}
+
+#SectionModal{
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+#modal{
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  display: flex; 
+  flex-flow: column nowrap;
+  height: 80%; 
+  width: 75% !important; 
+  background-color: seashell;
+
+}
+
+.CloseModal{
+  display: none;
+}
+
+.OpenModal{
+  display: block;
+}
+
+.btnClose{
+  position: absolute;
+  top: 5px; 
+  right: 5px; 
+  font-size: 12px; 
+  color: black; 
+  padding: 5px;
+}
+
+
+
+
+.month_tabElem{
+  width: 150px;
+  height: 110px;
+  padding: 5px;
+  border: 1px solid teal; 
+}
+
+
+.div_tabElem{
+  width: 14% !important;
+  height: 75px;
+  border: 1px solid white;
+  margin-bottom: 2px;
+  /* background-color: wheat; */
+}
+
+.span_tabElem{
+  display: flex;
+  justify-content: center;
+  width:100%; 
+  padding: 2px 0px;
+  background-color: #211e33;
+}
+
+.daySet{
+  border: 1px solid salmon;
+}
+
+
+
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: salmon;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d04535;
 }

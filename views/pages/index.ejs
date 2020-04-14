@@ -8,67 +8,77 @@
 
   <% include ../partials/nav.ejs %>
 
-  <div class="jumbotron text-center">
-    <div class="container">
+  <div class="jumbotron text-center containerCc">
+
       <!-- <a href="/" class="lang-logo">
         <img src="/lang-logo.png">
       </a> -->
-      <h1>Vulgarisation prédiction épidémiologique covid-19</h1>
-      <p>"parametre" solution appliqué par la population</p>
+      <h2>Estimation de la propagation du Covid-19 - Vulgarisation</h2>
+      <p></p>
       
       <div class="modelisation">
-        <div>
-          
-        </div>
-        <form>
-          <label>population totale</label>
-          <br>
-          <input type="number" id="population_totale" value='70000000'>
-          <br><br>
 
-          <label>nombre d'infecté initiaux</label>
-          <br>
-          <input type="number" id="initial_infected" value="2000">
-          <br>
+        <div class="j0">
+          <span class="span_tabElem"> J - 0 </span>
+          <div>
+            <label>population totale</label>
+            <br>
+            <input type="number" id="population_totale" value='70000000'>
+            <br><br>
 
-
-          <label>nombre de contacts</label>
-          <br>
-          <input type="number"  id="nombre_contacts" value="17">
-          <br>
+            <label>nombre d'infecté initiaux</label>
+            <br>
+            <input type="number" id="initial_infected" value="2000">
+            <br>
+          </div>
           
-          <label>Probabilité de transmission</label>
-          <br>
-          <input type="number"  id="proba_contagion" value='0.01'>
-          <br><br>
+          <div>
+            <label>nombre de contacts</label>
+            <br>
+            <input type="number"  id="nombre_contacts" value="17">
+            <br>
+            
+            <label>Probabilité de transmission</label>
+            <br>
+            <input type="number"  id="proba_contagion" value='0.01'>
+            <br><br>
+          </div>
           
-          <label>Durée de la maladie</label>
-          <br>
-          <input type="number" id="infection_duration" value='15'>
-          <br>
-                  
-          <label>Taux de mortalité</label>
-          <br>
-          <input type="number" id="death_rate" value='0.02'>
-          <br><br>
-                  
+          <div>
+            <label>Durée de la maladie</label>
+            <br>
+            <input type="number" id="infection_duration" value='15'>
+            <br>
+                    
+            <label>Taux de mortalité</label>
+            <br>
+            <input type="number" id="death_rate" value='0.02'>
+            <br><br>
+          </div>
+      
           <input type="button" id='btnSubmit' value="Submit" class="btnSubmit" >
-        </form>
-        <div>
-          <label>R0 = </label>
-          <p id="R0"></p>
-
-          <label>Nombre de mort = </label>
-          <p id="total_death"></p>
         </div>
-      </div>
-    </div>
-  </div>
 
+        <div id=tableCalendar></div>
+          
+
+        
+          <!-- <label>Nombre de mort = </label>
+          <p id="total_death"></p> -->
+      </div>
+      <div class="BlockR0">R0 = <span id="R0"></span></div>
+   
+  </div>
   
   <div class="container">
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>
+
+  <div id="SectionModal" class="SectionModal CloseModal">
+    <div id="modal">
+      
+    </div>  
+  <div>
 
   <!-- <script src="jsGraphDisplay.1.0.js"></script> -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
