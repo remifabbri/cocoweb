@@ -1,7 +1,6 @@
 let allDayRule = {};
 let firstSet = false;
 
-
 var btnSubmit = document.querySelector('#btnSubmit');
 
 btnSubmit.addEventListener('click', function() {
@@ -18,8 +17,6 @@ function mainBrain(){
     let R0 = data.nombre_contacts*data.proba_contagion*data.infection_duration; 
     console.log(R0);
 
-
-
     let balise_p_R0 = document.querySelector("#R0"); 
     balise_p_R0.innerHTML = R0; 
     
@@ -28,8 +25,6 @@ function mainBrain(){
 
     var dailyData = [];
     
-    
-
     for( i=0; i<180; i++){
         calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData);
     }
@@ -102,9 +97,7 @@ function constructCalendar(){
     console.log('start gen calendar allDayRule', allDayRule)
     for(let j = 1; j<180; j++){
 
-        let CONFIG_DAY;
-        
-         
+        let CONFIG_DAY; 
         
         if(!firstSet){
             CONFIG_DAY = {
@@ -123,7 +116,6 @@ function constructCalendar(){
             }
         }
         
-
         var day_tabElem = document.createElement('div');
         day_tabElem.setAttribute("id", `${j}`);
         if(CONFIG_DAY.setRuleDay){
