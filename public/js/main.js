@@ -133,67 +133,9 @@ function constructCalendar(){
         day_tabElem.addEventListener( 'click', () => {
             console.log(`jour${j}`);
 
-            var structureModal = document.querySelector('#SectionModal');
-            structureModal.removeAttribute('class', 'CloseModal'); 
-            structureModal.setAttribute('class', 'OpenModal'); 
+            creatAndManageModal(j, CONFIG_DAY);
 
-            var structModalBody = document.querySelector('#modal');
-
-            var bodyModal = document.createElement('div'); 
-            bodyModal.setAttribute('class', 'bodyModal'); 
-        
-            var closeModal = document.createElement('button');
-            closeModal.setAttribute('class', 'btnClose');
-            closeModal.setAttribute('value', `close`); 
-            bodyModal.append(closeModal); 
-            closeModal.addEventListener( 'click', () => {
-                bodyModal.remove();
-                structureModal.removeAttribute('class', 'OpenModal'); 
-                structureModal.setAttribute('class', 'CloseModal');
-                constructCalendar() 
-            })
-
-            var divRule1 = document.createElement('div');
-            divRule1.setAttribute('id', `${j}-rule1` );
-            if(CONFIG_DAY.rule1){
-                divRule1.setAttribute('class', `onRule` );
-                divRule1.setAttribute('name', `${allDayRule.rule1}` );
-            }else{
-                divRule1.setAttribute('class', `offRule` );
-                divRule1.setAttribute('name', `${allDayRule.rule1}` );
-            }
-            bodyModal.appendChild(divRule1);
             
-            divRule1.addEventListener( 'click', () => {
-                console.log(j);
-                
-                allDayRule[j].rule1 = !allDayRule[j].rule1;
-                allDayRule[j].setRule1 = !allDayRule[j].setRule1;
-                
-                Object.keys(allDayRule[j]).forEach( keyDayRule => {
-                    if(allDayRule[j][keyDayRule] && keyDayRule !== "setRuleDay"){
-                        allDayRule[j].setRuleDay = true  
-                    }
-                })
-
-                // fonction set de l'objet 
-                let setJ = j;
-                while(setJ < 179){
-
-                    console.log("while");
-                    console.log(setJ); 
-                    allDayRule[setJ].rule1 = allDayRule[j].rule1;
-                    setJ++ 
-
-                    if(allDayRule[setJ].setRule1){
-                        return
-                    } 
-
-                    
-                }
-                console.log(allDayRule); 
-            })
-            structModalBody.append(bodyModal); 
         }); 
 
         //set l'objet global des régle 
@@ -208,6 +150,71 @@ function constructCalendar(){
     }
     firstSet = true;
     
+}
+
+
+function creatAndManageModal(j, CONFIG_DAY){
+    var structureModal = document.querySelector('#SectionModal');
+    structureModal.removeAttribute('class', 'CloseModal'); 
+    structureModal.setAttribute('class', 'OpenModal'); 
+
+    var structModalBody = document.querySelector('#modal');
+
+    var bodyModal = document.createElement('div'); 
+    bodyModal.setAttribute('class', 'bodyModal'); 
+
+    var closeModal = document.createElement('button');
+    closeModal.setAttribute('class', 'btnClose');
+    closeModal.setAttribute('value', `close`); 
+    bodyModal.append(closeModal); 
+    closeModal.addEventListener( 'click', () => {
+        bodyModal.remove();
+        structureModal.removeAttribute('class', 'OpenModal'); 
+        structureModal.setAttribute('class', 'CloseModal');
+        constructCalendar() 
+    })
+
+    var divRule1 = document.createElement('div');
+    divRule1.setAttribute('id', `${j}-rule1` );
+    if(CONFIG_DAY.rule1){
+        divRule1.setAttribute('class', `onRule` );
+        divRule1.setAttribute('name', `${allDayRule.rule1}` );
+    }else{
+        divRule1.setAttribute('class', `offRule` );
+        divRule1.setAttribute('name', `${allDayRule.rule1}` );
+    }
+    bodyModal.appendChild(divRule1);
+    
+    divRule1.addEventListener( 'click', () => {
+        console.log(j);
+        
+        allDayRule[j].rule1 = !allDayRule[j].rule1;
+        allDayRule[j].setRule1 = !allDayRule[j].setRule1;
+        
+        Object.keys(allDayRule[j]).forEach( keyDayRule => {
+            if(allDayRule[j][keyDayRule] && keyDayRule !== "setRuleDay"){
+                allDayRule[j].setRuleDay = true  
+            }
+        })
+
+        // fonction set de l'objet 
+        let setJ = j;
+        while(setJ < 179){
+
+            console.log("while");
+            console.log(setJ); 
+            allDayRule[setJ].rule1 = allDayRule[j].rule1;
+            setJ++ 
+
+            if(allDayRule[setJ].setRule1){
+                return
+            } 
+
+            
+        }
+        console.log(allDayRule); 
+    })
+    structModalBody.append(bodyModal); 
 }
 
 function calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData ) {

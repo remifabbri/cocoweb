@@ -38,7 +38,7 @@ input{
   display: flex; 
   flex-flow: row nowrap;
   justify-content: center;
-  width: 66%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -49,6 +49,18 @@ input{
   border: 1px solid white;
 }
 
+
+.btnSubmit{
+  border: none; 
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5); 
+  font-size: bold !important;
+  color: white !important; 
+}
+.btnSubmit:hover{
+  background-color: salmon;
+}
+
 #tableCalendar{
   display: flex; 
   flex-flow: row wrap; 
@@ -57,9 +69,8 @@ input{
   height : 466px;
   overflow-y: scroll;
   padding: 5px; 
+
 }
-
-
 
 
 .BlockR0{
