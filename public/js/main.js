@@ -109,6 +109,14 @@ function constructCalendar(){
                     rule5 : false, 
                     rule6 : false,
                 },
+                name: {
+                    rule1 : "la régle N°1",
+                    rule2 : "la régle N°2",
+                    rule3 : "la régle N°3",
+                    rule4 : "la régle N°4",
+                    rule5 : "la régle N°5",
+                    rule6 : "la régle N°6",
+                }, 
                 checkHandleRules :{
                     rule1 : false,
                     rule2 : false,
@@ -174,7 +182,7 @@ function creatAndManageModal(j, CONFIG_DAY){
     var closeModal = document.createElement('button');
     closeModal.setAttribute('class', 'btnClose');
     closeModal.setAttribute('value', `close`); 
-    bodyModal.append(closeModal); 
+    structModalBody.append(closeModal); 
     closeModal.addEventListener( 'click', () => {
         bodyModal.remove();
         structureModal.removeAttribute('class', 'OpenModal'); 
@@ -182,18 +190,31 @@ function creatAndManageModal(j, CONFIG_DAY){
         constructCalendar() 
     })
 
+    manageBtnModal(j, CONFIG_DAY, bodyModal); 
+    structModalBody.append(bodyModal); 
+}
+
+
+function manageBtnModal(j, CONFIG_DAY, bodyModal){
+    var titleModal = document.createElement('div'); 
+    titleModal.setAttribute('class', 'titleModal');
+    titleModal.innerHTML = `Mesures appliqués au jours ${j} de l'épidémie !`;
+    bodyModal.append(titleModal); 
 
     for( let rule in CONFIG_DAY.rules){
-        var divRule = document.createElement('div'); 
+        var divRule = document.createElement('button'); 
         divRule.setAttribute('id', `${j}-${rule}`);
+        divRule.setAttribute('class', 'styleBtnRuleModal'); 
+        divRule.innerHTML =`${CONFIG_DAY.name[rule]}`; 
+    
         console.log(rule); 
         console.log(allDayRule[j].rules); 
         if(CONFIG_DAY.rules[rule]){
-            divRule.setAttribute('class', `onRule` );
-            divRule.setAttribute('name', `${allDayRule[j].rules[rule]}` );
+            divRule.setAttribute('class', `styleBtnRuleModal onRule` );
+            divRule.setAttribute('name', `${j}${rule}`);
         }else{
-            divRule.setAttribute('class', `offRule` );
-            divRule.setAttribute('name', `${allDayRule[j].rules[rule]}` );
+            divRule.setAttribute('class', `styleBtnRuleModal offRule` );
+            divRule.setAttribute('name', `${j}${rule}`);
         }
 
         bodyModal.appendChild(divRule);
@@ -221,47 +242,17 @@ function creatAndManageModal(j, CONFIG_DAY){
                     return
                 }    
             }
+            var child = bodyModal.lastElementChild;
+            while (child) { 
+                bodyModal.removeChild(child); 
+                child = bodyModal.lastElementChild; 
+            } 
+
+            manageBtnModal(j, CONFIG_DAY, bodyModal);
+
             console.log(allDayRule); 
         })
     }
-
-    // var divRule1 = document.createElement('div');
-    // divRule1.setAttribute('id', `${j}-rule1` );
-    // if(CONFIG_DAY.rule1){
-    //     divRule1.setAttribute('class', `onRule` );
-    //     divRule1.setAttribute('name', `${allDayRule.rule1}` );
-    // }else{
-    //     divRule1.setAttribute('class', `offRule` );
-    //     divRule1.setAttribute('name', `${allDayRule.rule1}` );
-    // }
-    // bodyModal.appendChild(divRule1);
-    
-    // divRule1.addEventListener( 'click', () => {
-    //     console.log(j);
-        
-    //     allDayRule[j].rule1 = !allDayRule[j].rule1;
-    //     allDayRule[j].setRule1 = !allDayRule[j].setRule1;
-        
-    //     Object.keys(allDayRule[j]).forEach( keyDayRule => {
-    //         if(allDayRule[j][keyDayRule] && keyDayRule !== "setRuleDay"){
-    //             allDayRule[j].setRuleDay = true  
-    //         }
-    //     })
-
-    //     // fonction set de l'objet 
-    //     let setJ = j;
-    //     while(setJ < 179){
-
-    //         allDayRule[setJ].rule1 = allDayRule[j].rule1;
-    //         setJ++ 
-
-    //         if(allDayRule[setJ].setRule1){
-    //             return
-    //         }    
-    //     }
-    //     console.log(allDayRule); 
-    // })
-    structModalBody.append(bodyModal); 
 }
 
 function calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData ) {

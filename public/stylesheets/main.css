@@ -88,15 +88,33 @@ input{
 }
 
 
+
+.bodyModal{
+  display: flex; 
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 10px;
+
+}
+
+.titleModal{
+  width: 100%;
+  font-size : 24px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.styleBtnRuleModal{
+  padding: 5px; 
+  width: 40%;
+}
+
+
 .onRule{
-  height: 20px;
-  width: 20px; 
   background-color: greenyellow; 
 }
 
-.offRule{
-  height: 20px;
-  width: 20px; 
+.offRule{ 
   background-color: red; 
 }
 
