@@ -7,63 +7,71 @@ btnSubmit.addEventListener('click', function() {
     mainBrain(); 
 });
 constructCalendar();
-mainBrain(); 
 
 
 function mainBrain(){
     let data = collectDataForm();
-    console.log(data);
+    // console.log(data);
 
-    let R0 = data.nombre_contacts*data.proba_contagion*data.infection_duration; 
-    console.log(R0);
 
-    let balise_p_R0 = document.querySelector("#R0"); 
-    balise_p_R0.innerHTML = R0; 
+
     
-    var remis_FirstDay = 2000;  
-    var deleteHuman_FirstDay = 50;
+    // var remis_FirstDay = 2000;  
+    // var deleteHuman_FirstDay = 50;
 
     var dailyData = [];
     
-    for( i=0; i<180; i++){
-        calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData);
+    for( i=0; i<365; i++){
+        calclDailyData(data, allDayRule ,dailyData, i);
+        console.log(dailyData);
     }
     
-    console.log(dailyData);
+    // console.log(dailyData);
 
     // let balise_nombre_mort = document.querySelector("#total_death");
     // balise_nombre_mort.innerHTML = 'Construire un tableau ici';
 
-    let dataGraph = {
+    let dataGraphNbMortJour = {
+        label: [],
+        data: []
+    };
+    let dataGraphNbMalade = {
         label: [],
         data: []
     };
 
+    console.log(dailyData);
     for( let indexDaily in dailyData ){
-        dataGraph.label.push( indexDaily*1),
-        dataGraph.data.push(dailyData[indexDaily].deleteHumanDay)
+        dataGraphNbMortJour.label.push( indexDaily*1),
+        dataGraphNbMortJour.data.push(dailyData[indexDaily].deleteHumanDay)
+    }
+    for( let indexDaily in dailyData ){
+        dataGraphNbMalade.label.push( indexDaily*1),
+        dataGraphNbMalade.data.push(dailyData[indexDaily].malades)
     }
 
-    console.log(dataGraph)
+
+    // console.log(dataGraph)
          
     var ctx = document.getElementById('myChart').getContext('2d');
 
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: dataGraph.label,
+            labels: dataGraphNbMortJour.label,
             datasets: [{ 
-                data: dataGraph.data,
+                data: dataGraphNbMortJour.data,
                 label: "Nombre de morts / Jours",
                 borderColor: "#3e95cd",
                 fill: false
+            },
+            { 
+                data: dataGraphNbMalade.data,
+                label: "Nombre de malade total",
+                borderColor: "#8e5ea2",
+                fill: false
             }
-            //, { 
-            //     data: [282,350,411,502,635,809,947,1402,3700,5267],
-            //     label: "Asia",
-            //     borderColor: "#8e5ea2",
-            //     fill: false
-            // }, { 
+            // , { 
             //     data: [168,170,178,190,203,276,408,547,675,734],
             //     label: "Europe",
             //     borderColor: "#3cba9f",
@@ -90,12 +98,118 @@ function mainBrain(){
     });
 }
 
+function calclDailyData(data, allDayRule, dailyData ) {
+    let dataDay = {};
+    let previusDay = dailyData[dailyData.length - 1];
+ 
+
+
+    
+    if(i !== 0 && i !== 1){
+        if(allDayRule[i].rules.rule1 !== allDayRule[i-1].rules.rule1){
+            if(allDayRule[i].rules.rule1){
+                data.nombre_contacts = data.nombre_contacts - 4
+            }else{
+                data.nombre_contacts = data.nombre_contacts + 4
+            }
+        }
+        if(allDayRule[i].rules.rule2 !== allDayRule[i-1].rules.rule2){
+            if(allDayRule[i].rules.rule2){
+                data.nombre_contacts = data.nombre_contacts - 4
+            }else{
+                data.nombre_contacts = data.nombre_contacts + 4
+            }
+        }
+        if(allDayRule[i].rules.rule3 !== allDayRule[i-1].rules.rule3){
+            if(allDayRule[i].rules.rule3){
+                data.nombre_contacts = data.nombre_contacts - 4
+            }else{
+                data.nombre_contacts = data.nombre_contacts + 4
+            }
+        }
+        if(allDayRule[i].rules.rule4 !== allDayRule[i-1].rules.rule4){
+            if(allDayRule[i].rules.rule4){
+                data.proba_contagion = data.proba_contagion - 0.001
+            }else{
+                data.proba_contagion = data.proba_contagion + 0.001
+            }
+        }
+        if(allDayRule[i].rules.rule5 !== allDayRule[i-1].rules.rule5){
+            if(allDayRule[i].rules.rule5){
+                data.proba_contagion = data.proba_contagion - 0.003
+            }else{
+                data.proba_contagion = data.proba_contagion + 0.003
+            }
+        }
+        if(allDayRule[i].rules.rule6 !== allDayRule[i-1].rules.rule6){
+            if(allDayRule[i].rules.rule6){
+                data.proba_contagion = data.proba_contagion - 0.001
+            }else{
+                data.proba_contagion = data.proba_contagion + 0.001
+            }
+        }
+    }
+    console.log(dailyData.length); 
+    console.log(allDayRule); 
+    console.log(data); 
+
+    let R0 = data.nombre_contacts*data.proba_contagion*data.infection_duration; 
+    console.log(R0);
+
+    let balise_p_R0 = document.querySelector("#R0"); 
+    balise_p_R0.innerHTML = R0; 
+
+    // if nombre de malade ayant besoin de soin > 7000 alors Death_Rate = 5%;
+
+    // condition jour 0 or not
+    if(dailyData.length === 0) {
+
+        for(p=0; p<7; p++){
+            dailyData.push(dataDay);
+        }
+
+        let deleteHuman_FirstDay = data.initial_infected * 0.02; 
+        let remis_FirstDay = 0; 
+
+        dataDay.sains = Math.round(data.popTotal - deleteHuman_FirstDay - remis_FirstDay - data.initial_infected);
+        dataDay.malades = Math.round(data.initial_infected);
+        dataDay.remis = Math.round(remis_FirstDay);
+        dataDay.deleteHuman = Math.round(deleteHuman_FirstDay);
+        dataDay.deleteHumanDay = 0;
+        
+        dailyData.push(dataDay);
+    }else{
+        dataDay.sains = Math.round(data.popTotal - previusDay.deleteHuman - previusDay.remis - previusDay.malades); 
+        dataDay.malades = Math.round(previusDay.malades + ( previusDay.malades * data.nombre_contacts * data.proba_contagion * ( previusDay.sains / data.popTotal )) - (( 1 / data.infection_duration ) * previusDay.malades ) - ((data.death_rate / data.infection_duration ) * previusDay.malades ));
+        dataDay.remis = Math.round(previusDay.remis + 1 / data.infection_duration * previusDay.malades);
+        dataDay.deleteHuman = Math.round(previusDay.deleteHuman + (( data.death_rate / data.infection_duration ) * previusDay.malades )); 
+        dataDay.deleteHumanDay = dataDay.deleteHuman - previusDay.deleteHuman;
+
+        dailyData.push(dataDay);
+    }
+}
+
+function collectDataForm () {
+
+    let data = {
+        popTotal : document.querySelector("#population_totale").value*1,
+        initial_infected : document.querySelector("#initial_infected").value*1,
+        nombre_contacts : document.querySelector("#nombre_contacts").value*1,
+        proba_contagion : document.querySelector("#proba_contagion").value*1,
+        infection_duration : document.querySelector("#infection_duration").value*1,
+        death_rate : document.querySelector("#death_rate").value*1
+    }
+
+    return data
+    //console.log('poptotal',popTotal); 
+}
+
 
 function constructCalendar(){
     var tableCalendar = document.querySelector("#tableCalendar");
     tableCalendar.innerHTML = '';
-    console.log('start gen calendar allDayRule', allDayRule)
-    for(let j = 1; j<180; j++){
+    // console.log('start gen calendar allDayRule', allDayRule)
+    for(let j = 1; j<365; j++){
 
         let CONFIG_DAY; 
         
@@ -128,13 +242,13 @@ function constructCalendar(){
                 setRuleDay : false
             }
         }else{
-            console.log('config deja set'); 
+            // console.log('config deja set'); 
             CONFIG_DAY = {
                 ...allDayRule[j]
             }
         }
 
-        console.log(allDayRule);
+        // console.log(allDayRule);
         
         var day_tabElem = document.createElement('div');
         day_tabElem.setAttribute("id", `${j}`);
@@ -207,8 +321,8 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
         divRule.setAttribute('class', 'styleBtnRuleModal'); 
         divRule.innerHTML =`${CONFIG_DAY.name[rule]}`; 
     
-        console.log(rule); 
-        console.log(allDayRule[j].rules); 
+        // console.log(rule); 
+        // console.log(allDayRule[j].rules); 
         if(CONFIG_DAY.rules[rule]){
             divRule.setAttribute('class', `styleBtnRuleModal onRule` );
             divRule.setAttribute('name', `${j}${rule}`);
@@ -220,7 +334,7 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
         bodyModal.appendChild(divRule);
         
         divRule.addEventListener( 'click', () => {
-            console.log(j);
+            // console.log(j);
             
             allDayRule[j].rules[rule] = !allDayRule[j].rules[rule];
             allDayRule[j].checkHandleRules[rule] = !allDayRule[j].checkHandleRules[rule];
@@ -233,7 +347,7 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
     
             // fonction set de l'objet 
             let setJ = j;
-            while(setJ < 179){
+            while(setJ < 364){
     
                 allDayRule[setJ].rules[rule] = allDayRule[j].rules[rule];
                 setJ++ 
@@ -250,48 +364,10 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
 
             manageBtnModal(j, CONFIG_DAY, bodyModal);
 
-            console.log(allDayRule); 
+            // console.log(allDayRule); 
         })
     }
 }
 
-function calclDailyData(data, remis_FirstDay, deleteHuman_FirstDay, dailyData ) {
-    let dataDay = {};
-    let previusDay = dailyData[dailyData.length - 1];
 
-    // if nombre de malade ayant besoin de soin > 7000 alors Death_Rate = 5%;
 
-    // condition jour 0 or not
-    if(dailyData.length === 0) {
-        dataDay.sains = Math.round(data.popTotal - deleteHuman_FirstDay - remis_FirstDay - data.initial_infected);
-        dataDay.malades = Math.round(data.initial_infected);
-        dataDay.remis = Math.round(remis_FirstDay);
-        dataDay.deleteHuman = Math.round(deleteHuman_FirstDay);
-        dataDay.deleteHumanDay = 0;
-        
-        dailyData.push(dataDay);
-    }else{
-        dataDay.sains = Math.round(data.popTotal - previusDay.deleteHuman - previusDay.remis - previusDay.malades); 
-        dataDay.malades = Math.round(previusDay.malades + ( previusDay.malades * data.nombre_contacts * data.proba_contagion * ( previusDay.sains / data.popTotal )) - (( 1 / data.infection_duration ) * previusDay.malades ) - ((data.death_rate / data.infection_duration ) * previusDay.malades ));
-        dataDay.remis = Math.round(previusDay.remis + 1 / data.infection_duration * previusDay.malades);
-        dataDay.deleteHuman = Math.round(previusDay.deleteHuman + (( data.death_rate / data.infection_duration ) * previusDay.malades )); 
-        dataDay.deleteHumanDay = dataDay.deleteHuman - previusDay.deleteHuman;
-
-        dailyData.push(dataDay);
-    }
-}
-
-function collectDataForm () {
-
-    let data = {
-        popTotal : document.querySelector("#population_totale").value*1,
-        initial_infected : document.querySelector("#initial_infected").value*1,
-        nombre_contacts : document.querySelector("#nombre_contacts").value*1,
-        proba_contagion : document.querySelector("#proba_contagion").value*1,
-        infection_duration : document.querySelector("#infection_duration").value*1,
-        death_rate : document.querySelector("#death_rate").value*1
-    }
-
-    return data
-    //console.log('poptotal',popTotal); 
-}
