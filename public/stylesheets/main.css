@@ -49,8 +49,20 @@ input{
   border: 1px solid white;
 }
 
+.inputJ0{
+  border: 2px solid salmon; 
+  background: rgba(0, 0, 0, 0.5); 
+  color: gainsboro; 
+  padding: 2px 5px;
+  margin-bottom: 10px; 
+}
 
-.btnSubmit{
+
+.btnSubmit{ 
+  margin-top: 20px;
+  padding: 10px; 
+  font-size: 20px;
+
   border: none; 
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5); 
@@ -84,17 +96,13 @@ input{
   font-size: 20px; 
   background-color : cornflowerblue;
   border-radius: 5px;
-
 }
-
-
 
 .bodyModal{
   display: flex; 
   flex-flow: row wrap;
   justify-content: space-around;
   padding: 10px;
-
 }
 
 .titleModal{
@@ -106,16 +114,38 @@ input{
 
 .styleBtnRuleModal{
   padding: 5px; 
-  width: 40%;
+  width: 30%;
+  height: 150px;
+  /* border-radius: 50%; */
+  font-size: 24px;
+  font-weight: bold;
+  background-color:gainsboro;
 }
 
-
 .onRule{
-  background-color: greenyellow; 
+  position: relative;
+  border: 10px solid darkred;
+}
+.onRule::before{
+  width: 0;
+  height: 0;
+  border-left: 10px solid darkred;
+  border-right: 10px solid darkred;
+  border-top: 75px solid darkred;
+  border-bottom:75px solid darkred;
+  position: absolute;
+  content: "";
+  top: -10px;
+  left: 112px; 
+  
+ 
+  transform: rotate(45deg);
+  /* border: 10px solid darkred; */
 }
 
 .offRule{ 
-  background-color: red; 
+
+  border: 10px solid cornflowerblue;
 }
 
 #SectionModal{
@@ -185,9 +215,35 @@ input{
 }
 
 .daySet{
-  border: 1px solid salmon;
+  position: relative;
+  border: 3px solid salmon;
 }
-
+.daySet::before{
+  width: 0;
+  height: 0;
+  border-left: 2px solid salmon;
+  border-right: 2px solid salmon;
+  border-top: 15px solid salmon;
+  border-bottom: 15px solid salmon;
+  position: absolute;
+  content: "";
+  top: 32px;
+  left: 28px;
+  transform: rotate(45deg);
+}
+.daySet::after{
+  width: 0;
+  height: 0;
+  border-left: 2px solid salmon;
+  border-right: 2px solid salmon;
+  border-top: 15px solid salmon;
+  border-bottom: 15px solid salmon;
+  position: absolute;
+  content: "";
+  top: 32px;
+  left: 28px;
+  transform: rotate(-45deg);
+}
 
 
 

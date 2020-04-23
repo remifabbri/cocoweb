@@ -1,5 +1,31 @@
 let allDayRule = {};
 let firstSet = false;
+let checkPeriodeRule ={
+    rule1 : { 
+        count :0,
+        waitUpdate : false,
+    },
+    rule2 :  { 
+        count :0,
+        waitUpdate : false,
+    },
+    rule3 :  { 
+        count :0,
+        waitUpdate : false,
+    },
+    rule4 :  { 
+        count :0,
+        waitUpdate : false,
+    },
+    rule5 : { 
+        count :0,
+        waitUpdate : false,
+    },
+    rule6 :  { 
+        count :0,
+        waitUpdate : false,
+    }
+} 
 
 var btnSubmit = document.querySelector('#btnSubmit');
 
@@ -98,55 +124,135 @@ function mainBrain(){
     });
 }
 
+
+
+// 
+
+
 function calclDailyData(data, allDayRule, dailyData ) {
     let dataDay = {};
     let previusDay = dailyData[dailyData.length - 1];
  
-
-
-    
     if(i !== 0 && i !== 1){
+        // rule 1
         if(allDayRule[i].rules.rule1 !== allDayRule[i-1].rules.rule1){
-            if(allDayRule[i].rules.rule1){
-                data.nombre_contacts = data.nombre_contacts - 4
-            }else{
-                data.nombre_contacts = data.nombre_contacts + 4
-            }
+                checkPeriodeRule.rule1.waitUpdate = true; 
         }
+
+        if(allDayRule[i].rules.rule1){
+            checkPeriodeRule.rule1.count++; 
+        }else{
+            checkPeriodeRule.rule1.count = 0;
+        }
+
+        if(checkPeriodeRule.rule1.waitUpdate && checkPeriodeRule.rule1.count >= 7 ){
+            data.nombre_contacts = data.nombre_contacts - 4
+            checkPeriodeRule.rule1.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule1.waitUpdate && checkPeriodeRule.rule1.count === 0 ){
+            data.nombre_contacts = data.nombre_contacts + 4
+            checkPeriodeRule.rule1.waitUpdate = false; 
+        }
+        
+        // rule 2
         if(allDayRule[i].rules.rule2 !== allDayRule[i-1].rules.rule2){
-            if(allDayRule[i].rules.rule2){
-                data.nombre_contacts = data.nombre_contacts - 4
-            }else{
-                data.nombre_contacts = data.nombre_contacts + 4
-            }
+            checkPeriodeRule.rule2.waitUpdate = true; 
         }
+
+        if(allDayRule[i].rules.rule2){
+            checkPeriodeRule.rule2.count++; 
+        }else{
+            checkPeriodeRule.rule2.count = 0;
+        }
+
+        if(checkPeriodeRule.rule2.waitUpdate && checkPeriodeRule.rule2.count >= 7 ){
+            data.nombre_contacts = data.nombre_contacts - 4
+            checkPeriodeRule.rule2.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule2.waitUpdate && checkPeriodeRule.rule2.count === 0 ){
+            data.nombre_contacts = data.nombre_contacts + 4
+            checkPeriodeRule.rule2.waitUpdate = false; 
+        }
+
+        // rule 3
         if(allDayRule[i].rules.rule3 !== allDayRule[i-1].rules.rule3){
-            if(allDayRule[i].rules.rule3){
-                data.nombre_contacts = data.nombre_contacts - 4
-            }else{
-                data.nombre_contacts = data.nombre_contacts + 4
-            }
+            checkPeriodeRule.rule3.waitUpdate = true; 
         }
+
+        if(allDayRule[i].rules.rule3){
+            checkPeriodeRule.rule3.count++; 
+        }else{
+            checkPeriodeRule.rule3.count = 0;
+        }
+
+        if(checkPeriodeRule.rule3.waitUpdate && checkPeriodeRule.rule3.count >= 7 ){
+            data.nombre_contacts = data.nombre_contacts - 4
+            checkPeriodeRule.rule3.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule3.waitUpdate && checkPeriodeRule.rule3.count === 0 ){
+            data.nombre_contacts = data.nombre_contacts + 4
+            checkPeriodeRule.rule3.waitUpdate = false; 
+        }
+
+
+        // rule 4
         if(allDayRule[i].rules.rule4 !== allDayRule[i-1].rules.rule4){
-            if(allDayRule[i].rules.rule4){
-                data.proba_contagion = data.proba_contagion - 0.001
-            }else{
-                data.proba_contagion = data.proba_contagion + 0.001
-            }
+            checkPeriodeRule.rule4.waitUpdate = true; 
         }
+
+        if(allDayRule[i].rules.rule4){
+            checkPeriodeRule.rule4.count++; 
+        }else{
+            checkPeriodeRule.rule4.count = 0;
+        }
+
+        if(checkPeriodeRule.rule4.waitUpdate && checkPeriodeRule.rule4.count >= 7 ){
+            data.proba_contagion = data.proba_contagion - 0.001
+            checkPeriodeRule.rule4.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule4.waitUpdate && checkPeriodeRule.rule4.count === 0 ){
+            data.proba_contagion = data.proba_contagion + 0.001
+            checkPeriodeRule.rule4.waitUpdate = false; 
+        }
+
+        // rule 5
         if(allDayRule[i].rules.rule5 !== allDayRule[i-1].rules.rule5){
-            if(allDayRule[i].rules.rule5){
-                data.proba_contagion = data.proba_contagion - 0.003
-            }else{
-                data.proba_contagion = data.proba_contagion + 0.003
-            }
+            checkPeriodeRule.rule5.waitUpdate = true; 
         }
+
+        if(allDayRule[i].rules.rule5){
+            checkPeriodeRule.rule5.count++; 
+        }else{
+            checkPeriodeRule.rule5.count = 0;
+        }
+
+        if(checkPeriodeRule.rule5.waitUpdate && checkPeriodeRule.rule5.count >= 7 ){
+            data.proba_contagion = data.proba_contagion - 0.003; 
+            checkPeriodeRule.rule5.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule5.waitUpdate && checkPeriodeRule.rule5.count === 0 ){
+            data.proba_contagion = data.proba_contagion + 0.003; 
+            checkPeriodeRule.rule5.waitUpdate = false; 
+        }
+
+        // rule 6
         if(allDayRule[i].rules.rule6 !== allDayRule[i-1].rules.rule6){
-            if(allDayRule[i].rules.rule6){
-                data.proba_contagion = data.proba_contagion - 0.001
-            }else{
-                data.proba_contagion = data.proba_contagion + 0.001
-            }
+            checkPeriodeRule.rule6.waitUpdate = true; 
+        }
+
+        if(allDayRule[i].rules.rule6){
+            checkPeriodeRule.rule6.count++; 
+        }else{
+            checkPeriodeRule.rule6.count = 0;
+        }
+
+        if(checkPeriodeRule.rule6.waitUpdate && checkPeriodeRule.rule6.count >= 7 ){
+            data.proba_contagion = data.proba_contagion - 0.001
+            checkPeriodeRule.rule6.waitUpdate = false; 
+        }
+        if(checkPeriodeRule.rule6.waitUpdate && checkPeriodeRule.rule6.count === 0 ){
+            data.proba_contagion = data.proba_contagion + 0.001
+            checkPeriodeRule.rule6.waitUpdate = false; 
         }
     }
     console.log(dailyData.length); 
@@ -163,10 +269,6 @@ function calclDailyData(data, allDayRule, dailyData ) {
 
     // condition jour 0 or not
     if(dailyData.length === 0) {
-
-        for(p=0; p<7; p++){
-            dailyData.push(dataDay);
-        }
 
         let deleteHuman_FirstDay = data.initial_infected * 0.02; 
         let remis_FirstDay = 0; 
@@ -319,15 +421,27 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
         var divRule = document.createElement('button'); 
         divRule.setAttribute('id', `${j}-${rule}`);
         divRule.setAttribute('class', 'styleBtnRuleModal'); 
-        divRule.innerHTML =`${CONFIG_DAY.name[rule]}`; 
+
+        let spanNameRule = document.createElement('span'); 
+        spanNameRule.innerHTML =`${CONFIG_DAY.name[rule]}`; 
+        divRule.appendChild(spanNameRule); 
     
         // console.log(rule); 
         // console.log(allDayRule[j].rules); 
         if(CONFIG_DAY.rules[rule]){
-            divRule.setAttribute('class', `styleBtnRuleModal onRule` );
+            if(rule === "rule4" || rule === "rule5" || rule === "rule6"){
+                divRule.setAttribute('class', `styleBtnRuleModal offRule` );
+            }else{
+                divRule.setAttribute('class', `styleBtnRuleModal onRule` );
+            }
             divRule.setAttribute('name', `${j}${rule}`);
+            
         }else{
-            divRule.setAttribute('class', `styleBtnRuleModal offRule` );
+            if(rule === "rule4" || rule === "rule5" || rule === "rule6"){
+                divRule.setAttribute('class', `styleBtnRuleModal onRule` ); 
+            }else{
+                divRule.setAttribute('class', `styleBtnRuleModal offRule` );
+            }
             divRule.setAttribute('name', `${j}${rule}`);
         }
 
