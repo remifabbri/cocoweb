@@ -224,12 +224,12 @@ function constructCalendar(){
                     rule6 : false,
                 },
                 name: {
-                    rule1 : "la régle N°1",
-                    rule2 : "la régle N°2",
-                    rule3 : "la régle N°3",
-                    rule4 : "la régle N°4",
-                    rule5 : "la régle N°5",
-                    rule6 : "la régle N°6",
+                    rule1 : "Event +500p",
+                    rule2 : "Travail + Activité",
+                    rule3 : "Etablissements Scolaires",
+                    rule4 : "Masques",
+                    rule5 : "Lavage de main",
+                    rule6 : "Distance 1m",
                 }, 
                 checkHandleRules :{
                     rule1 : false,
