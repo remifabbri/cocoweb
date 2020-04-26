@@ -130,14 +130,27 @@ input{
 }
 
 .styleBtnRuleModal{
+  display: flex; 
+  flex-flow: column-reverse nowrap;
+  justify-content: center;
+  align-items: center; 
   padding: 5px; 
-  width: 30%;
-  height: 150px;
-  /* border-radius: 50%; */
-  font-size: 24px;
+  width:200px;
+  height: 200px;
+  border-radius: 50%;
   font-weight: bold;
   background-color:gainsboro;
 }
+
+.styleBtnRuleModal span:first-child{
+  font-size: 16px;
+  font-weight: bold;
+}
+.styleBtnRuleModal span:last-child{
+  font-size:40px;
+  font-weight: bold;
+}
+
 
 .onRule{
   position: relative;
@@ -146,17 +159,16 @@ input{
 .onRule::before{
   width: 0;
   height: 0;
-  border-left: 10px solid darkred;
-  border-right: 10px solid darkred;
-  border-top: 75px solid darkred;
-  border-bottom:75px solid darkred;
+  border-left: 5px solid darkred;
+  border-right: 5px solid darkred;
+  border-top: 100px solid darkred;
+  border-bottom:100px solid darkred;
   position: absolute;
   content: "";
-  top: -10px;
-  left: 112px; 
+  top: 50%;
+  left:50%; 
+  transform: translate(-50%, -50%) rotate(45deg);
   
- 
-  transform: rotate(45deg);
   /* border: 10px solid darkred; */
 }
 
