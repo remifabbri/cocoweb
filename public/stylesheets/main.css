@@ -32,6 +32,7 @@ input{
 
 .containerCc{
   position: relative;
+  margin-bottom: 0px;
 }
 
 .modelisation{
@@ -113,6 +114,11 @@ input{
   font-size: 20px; 
   background-color : cornflowerblue;
   border-radius: 5px;
+}
+
+.containerCharts{
+  background-color: #222;
+  padding-top: 50px; 
 }
 
 .bodyModal{
