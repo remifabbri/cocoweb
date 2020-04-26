@@ -79,9 +79,9 @@ function mainBrain(){
 
     // console.log(dataGraph)
          
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var chartNbMort = document.getElementById('chartNbMort').getContext('2d');
 
-    var myChart = new Chart(ctx, {
+    new Chart(chartNbMort, {
         type: 'line',
         data: {
             labels: dataGraphNbMortJour.label,
@@ -90,8 +90,42 @@ function mainBrain(){
                 label: "Nombre de morts / Jours",
                 borderColor: "#3e95cd",
                 fill: false
-            },
-            { 
+            }
+            // , { 
+            //     data: [168,170,178,190,203,276,408,547,675,734],
+            //     label: "Europe",
+            //     borderColor: "#3cba9f",
+            //     fill: false
+            // }, { 
+            //     data: [40,20,10,16,24,38,74,167,508,784],
+            //     label: "Latin America",
+            //     borderColor: "#e8c3b9",
+            //     fill: false
+            // }, { 
+            //     data: [6,3,2,2,7,26,82,172,312,433],
+            //     label: "North America",
+            //     borderColor: "#c45850",
+            //     fill: false
+            // }
+            ]
+        }
+        // options: {
+        //     title: {
+        //     display: true,
+        //     text: 'World population per region (in millions)'
+        //     }
+        // }
+    });
+
+
+    var chartNbMaldade = document.getElementById('chartNbMaldade').getContext('2d');
+
+    new Chart(chartNbMaldade, {
+        type: 'line',
+        data: {
+            labels: dataGraphNbMalade.label,
+            datasets: [
+            {
                 data: dataGraphNbMalade.data,
                 label: "Nombre de malade total",
                 borderColor: "#8e5ea2",
@@ -114,13 +148,13 @@ function mainBrain(){
             //     fill: false
             // }
             ]
-        },
-        options: {
-            title: {
-            display: true,
-            text: 'World population per region (in millions)'
-            }
         }
+        // options: {
+        //     title: {
+        //     display: true,
+        //     text: 'World population per region (in millions)'
+        //     }
+        // }
     });
 }
 
@@ -332,7 +366,15 @@ function constructCalendar(){
                     rule4 : "Masques",
                     rule5 : "Lavage de main",
                     rule6 : "Distance 1m",
-                }, 
+                },
+                unicodeRule: {
+                    rule1 : "\u{1F3DF}",
+                    rule2 : "\u{1F3ED}",
+                    rule3 : "\u{1F4DA}",
+                    rule4 : "\u{1F637}",
+                    rule5 : "\u{1F9FC}",
+                    rule6 : "\u{2194}", 
+                },
                 checkHandleRules :{
                     rule1 : false,
                     rule2 : false,
@@ -358,6 +400,53 @@ function constructCalendar(){
             day_tabElem.setAttribute("class", `div_tabElem daySet`);  
         }else{
             day_tabElem.setAttribute("class", `div_tabElem`);
+        }
+        
+        let day_icon = document.createElement('div');
+        day_icon.setAttribute('class', 'iconCalendar');
+        day_tabElem.append(day_icon);
+
+        let spanIcon1 = document.createElement('span'); 
+        if(CONFIG_DAY.rules.rule1){
+            spanIcon1.innerHTML = `${CONFIG_DAY.unicodeRule.rule1}`;
+            day_icon.append(spanIcon1); 
+        }else{
+            spanIcon1.remove();
+        }
+        let spanIcon2 = document.createElement('span'); 
+        if(CONFIG_DAY.rules.rule2){
+            spanIcon2.innerHTML = `${CONFIG_DAY.unicodeRule.rule2}`;
+            day_icon.append(spanIcon2); 
+        }else{
+            spanIcon2.remove();
+        }
+        let spanIcon3 = document.createElement('span'); 
+        if(CONFIG_DAY.rules.rule3){
+            spanIcon3.innerHTML = `${CONFIG_DAY.unicodeRule.rule3}`;
+            day_icon.append(spanIcon3); 
+        }else{
+            spanIcon3.remove();
+        }
+        let spanIcon4 = document.createElement('span'); 
+        if(CONFIG_DAY.rules.rule4){
+            spanIcon4.innerHTML = `${CONFIG_DAY.unicodeRule.rule4}`;
+            day_icon.append(spanIcon4); 
+        }else{
+            spanIcon4.remove();
+        }
+        let spanIcon5 = document.createElement('span');
+        if(CONFIG_DAY.rules.rule5){
+            spanIcon5.innerHTML = `${CONFIG_DAY.unicodeRule.rule5}`;
+            day_icon.append(spanIcon5); 
+        }else{
+            spanIcon5.remove();
+        }
+        let spanIcon6 = document.createElement('span');
+        if(CONFIG_DAY.rules.rule6){
+            spanIcon6.innerHTML = `${CONFIG_DAY.unicodeRule.rule6}`;
+            day_icon.append(spanIcon6); 
+        }else{
+            spanIcon6.remove();
         }
 
         var span_tabElem = document.createElement('span');
@@ -397,7 +486,7 @@ function creatAndManageModal(j, CONFIG_DAY){
 
     var closeModal = document.createElement('button');
     closeModal.setAttribute('class', 'btnClose');
-    closeModal.setAttribute('value', `close`); 
+    closeModal.innerHTML = `Close X`;
     structModalBody.append(closeModal); 
     closeModal.addEventListener( 'click', () => {
         bodyModal.remove();
@@ -405,6 +494,21 @@ function creatAndManageModal(j, CONFIG_DAY){
         structureModal.setAttribute('class', 'CloseModal');
         constructCalendar() 
     })
+    
+
+        
+        // structureModal.addEventListener("click", (e) =>{
+        //     let isClickInside = bodyModal.contains(event.target); 
+    
+        //     if(!isClickInside){
+        //         bodyModal.remove();
+        //         structureModal.removeAttribute('class', 'OpenModal'); 
+        //         structureModal.setAttribute('class', 'CloseModal');
+        //         constructCalendar() 
+        //     }
+        // });
+
+ 
 
     manageBtnModal(j, CONFIG_DAY, bodyModal); 
     structModalBody.append(bodyModal); 
@@ -435,7 +539,7 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
                 unicodeRule = "\u{1F3DF}"; 
             break;
             case 'rule2':
-                unicodeRule = "\u{1F3ED} \u{1F354}"; 
+                unicodeRule = "\u{1F3ED}"; 
             break;
             case 'rule3':
                 unicodeRule ="\u{1F4DA}"; 

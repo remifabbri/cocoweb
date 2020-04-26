@@ -42,7 +42,7 @@ input{
   margin: 0 auto;
 }
 
-@media (max-width: 950px){
+@media screen and (min-width: 900px) {
   .modelisation{
     width: 100%;
   }
@@ -119,12 +119,14 @@ input{
   display: flex; 
   flex-flow: row wrap;
   justify-content: space-around;
-  padding: 10px;
+  padding: 25px;
+  padding-top: 40px;
 }
 
 .titleModal{
   width: 100%;
-  font-size : 24px;
+  font-size : 30px;
+  font-weight: bold;
   text-align: center;
   margin-bottom: 10px;
 }
@@ -193,9 +195,10 @@ input{
   transform: translate(-50%, -50%); 
   display: flex; 
   flex-flow: column nowrap;
-  height: 80%; 
+  height:auto; 
   width: 75% !important; 
   background-color: seashell;
+  border-radius: 10px;
 
 }
 
@@ -211,9 +214,12 @@ input{
   position: absolute;
   top: 5px; 
   right: 5px; 
-  font-size: 12px; 
-  color: black; 
+  border-radius : 10px;
+  font-size: 14px; 
+  color: white;
+  background-color: black; 
   padding: 5px;
+  border: none;
 }
 
 
@@ -228,6 +234,9 @@ input{
 
 
 .div_tabElem{
+  display: flex;
+  flex-flow: column-reverse wrap;
+  justify-content: flex-end;
   width: 14% !important;
   height: 75px;
   border: 1px solid white;
@@ -236,38 +245,28 @@ input{
 }
 
 .span_tabElem{
-  display: flex;
-  justify-content: center;
-  width:100%; 
+  display: block;
+  width:100%;
+  height: 25px;
   padding: 2px 0px;
   background-color: #211e33;
+}
+
+.iconCalendar{
+  display: flex; 
+  flex-flow: row wrap; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.iconCalendar span{
+  font-size: 14px; 
 }
 
 .daySet{
   position: relative;
   border: 3px solid salmon;
 }
-.daySet::before{
-  content: 'U+2764';
-  width: 10px;
-  height: 10px;
-
-  position: absolute;
-  top: 32px;
-  left: 28px;
-  transform: rotate(45deg);
-}
-.daySet::after{
-  width: 10px;
-  height: 10px;
-
-  position: absolute;
-  content: "U+2764";
-  top: 32px;
-  left: 28px;
-  transform: rotate(-45deg);
-}
-
 
 
 
