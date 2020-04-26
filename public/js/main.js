@@ -425,9 +425,36 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal){
         let spanNameRule = document.createElement('span'); 
         spanNameRule.innerHTML =`${CONFIG_DAY.name[rule]}`; 
         divRule.appendChild(spanNameRule); 
-    
+
         // console.log(rule); 
-        // console.log(allDayRule[j].rules); 
+        // console.log(allDayRule[j].rules);
+
+        let unicodeRule; 
+        switch(rule){
+            case 'rule1':
+                unicodeRule = "\u{1F3DF}"; 
+            break;
+            case 'rule2':
+                unicodeRule = "\u{1F3ED} \u{1F354}"; 
+            break;
+            case 'rule3':
+                unicodeRule ="\u{1F4DA}"; 
+            break;
+            case 'rule4':
+                unicodeRule = "\u{1F637}";
+            break;
+            case 'rule5':
+                unicodeRule = "\u{1F9FC}"; 
+            break;
+            case 'rule6':
+                unicodeRule ="\u{2194}"; 
+            break;
+        }
+
+        let spanEmojiRule = document.createElement('span'); 
+        spanEmojiRule.innerHTML =`${unicodeRule}`; 
+        divRule.appendChild(spanEmojiRule); 
+        
         if(CONFIG_DAY.rules[rule]){
             if(rule === "rule4" || rule === "rule5" || rule === "rule6"){
                 divRule.setAttribute('class', `styleBtnRuleModal offRule` );

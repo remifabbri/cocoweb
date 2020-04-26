@@ -236,27 +236,21 @@ input{
   border: 3px solid salmon;
 }
 .daySet::before{
-  width: 0;
-  height: 0;
-  border-left: 2px solid salmon;
-  border-right: 2px solid salmon;
-  border-top: 15px solid salmon;
-  border-bottom: 15px solid salmon;
+  content: 'U+2764';
+  width: 10px;
+  height: 10px;
+
   position: absolute;
-  content: "";
   top: 32px;
   left: 28px;
   transform: rotate(45deg);
 }
 .daySet::after{
-  width: 0;
-  height: 0;
-  border-left: 2px solid salmon;
-  border-right: 2px solid salmon;
-  border-top: 15px solid salmon;
-  border-bottom: 15px solid salmon;
+  width: 10px;
+  height: 10px;
+
   position: absolute;
-  content: "";
+  content: "U+2764";
   top: 32px;
   left: 28px;
   transform: rotate(-45deg);
