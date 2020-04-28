@@ -57,7 +57,23 @@ function mainBrain(){
     // let balise_nombre_mort = document.querySelector("#total_death");
     // balise_nombre_mort.innerHTML = 'Construire un tableau ici';
 
+    let dataGraphNbMort = {
+        label: [],
+        data: []
+    };
     let dataGraphNbMortJour = {
+        label: [],
+        data: []
+    };
+    let dataGraphNbRemis = {
+        label: [],
+        data: []
+    };
+    let dataGraphNbRemisJour = {
+        label: [],
+        data: []
+    };
+    let dataGraphNbSains = {
         label: [],
         data: []
     };
@@ -65,16 +81,42 @@ function mainBrain(){
         label: [],
         data: []
     };
+    let dataGraphNbMaladeJour = {
+        label: [],
+        data: []
+    };
+    
 
     console.log(dailyData);
+    for( let indexDaily in dailyData ){
+        dataGraphNbMort.label.push( indexDaily*1),
+        dataGraphNbMort.data.push(dailyData[indexDaily].deleteHuman)
+    }
     for( let indexDaily in dailyData ){
         dataGraphNbMortJour.label.push( indexDaily*1),
         dataGraphNbMortJour.data.push(dailyData[indexDaily].deleteHumanDay)
     }
     for( let indexDaily in dailyData ){
+        dataGraphNbRemis.label.push( indexDaily*1),
+        dataGraphNbRemis.data.push(dailyData[indexDaily].remis)
+    }
+    for( let indexDaily in dailyData ){
+        dataGraphNbRemisJour.label.push( indexDaily*1),
+        dataGraphNbRemisJour.data.push(dailyData[indexDaily].remisDay)
+    }
+    for( let indexDaily in dailyData ){
+        dataGraphNbSains.label.push( indexDaily*1),
+        dataGraphNbSains.data.push(dailyData[indexDaily].sains)
+    }
+    for( let indexDaily in dailyData ){
         dataGraphNbMalade.label.push( indexDaily*1),
         dataGraphNbMalade.data.push(dailyData[indexDaily].malades)
     }
+    for( let indexDaily in dailyData ){
+        dataGraphNbMaladeJour.label.push( indexDaily*1),
+        dataGraphNbMaladeJour.data.push(dailyData[indexDaily].maladesDay)
+    }
+
 
 
     // console.log(dataGraph)
@@ -93,30 +135,78 @@ function mainBrain(){
     chartNbMort.getContext('2d');
     containerCharts.append(chartNbMort);
 
+    // new Chart(chartNbMort, {
+    //     type: 'line',
+    //     data: {
+    //         labels: dataGraphNbMortJour.label,
+    //         datasets: [{ 
+    //             data: dataGraphNbMortJour.data,
+    //             label: "Nombre de morts / Jours",
+    //             borderColor: "#3e95cd",
+    //             fill: false
+    //         },
+    //         {
+    //             data: dataGraphNbMalade.data,
+    //             label: "Nombre de malade total",
+    //             borderColor: "#8e5ea2",
+    //             fill: false
+    //         }
+    //         // , { 
+    //         //     data: [168,170,178,190,203,276,408,547,675,734],
+    //         //     label: "Europe",
+    //         //     borderColor: "#3cba9f",
+    //         //     fill: false
+    //         // }
+    //         ]
+    //     }
+    //     // options: {
+    //     //     title: {
+    //     //     display: true,
+    //     //     text: 'World population per region (in millions)'
+    //     //     }
+    //     // }
+    // });
+
     new Chart(chartNbMort, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: dataGraphNbMortJour.label,
-            datasets: [{ 
-                data: dataGraphNbMortJour.data,
-                label: "Nombre de morts / Jours",
-                borderColor: "#3e95cd",
-                fill: false
-            }
-            // , { 
-            //     data: [168,170,178,190,203,276,408,547,675,734],
-            //     label: "Europe",
-            //     borderColor: "#3cba9f",
-            //     fill: false
-            // }
+            datasets: [
+                { 
+                    data: dataGraphNbRemisJour.data,
+                    categoryPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    backgroundColor: "#039be5",
+                    hoverBackgroundColor : "#29b6f6",
+                    label: "Nombre de Remis / Jour",
+                   
+                },
+                {
+                    data: dataGraphNbMortJour.data,
+                    categoryPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    backgroundColor: "#f06292",
+                    hoverBackgroundColor : "#ff94c2",
+                    
+                    label: "Nombre de Mort / Jour",
+
+                }
             ]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
         }
-        // options: {
-        //     title: {
-        //     display: true,
-        //     text: 'World population per region (in millions)'
-        //     }
-        // }
     });
 
     let chartNbMaldade = document.createElement('canvas');
@@ -132,7 +222,19 @@ function mainBrain(){
             {
                 data: dataGraphNbMalade.data,
                 label: "Nombre de malade total",
-                borderColor: "#8e5ea2",
+                borderColor: "#f06292",
+                fill: false
+            },
+            {
+                data: dataGraphNbSains.data,
+                label: "Nombre de sains total",
+                borderColor: "#039be5",
+                fill: false
+            },
+            {
+                data: dataGraphNbRemis.data,
+                label: "Nombre de Remis total",
+                borderColor: "#81c784",
                 fill: false
             }
             // , { 
@@ -303,7 +405,9 @@ function calclDailyData(data, allDayRule, dailyData ) {
 
         dataDay.sains = Math.round(data.popTotal - deleteHuman_FirstDay - remis_FirstDay - data.initial_infected);
         dataDay.malades = Math.round(data.initial_infected);
+        dataDay.maladesDay = Math.round(data.initial_infected);
         dataDay.remis = Math.round(remis_FirstDay);
+        dataDay.remis = 0;
         dataDay.deleteHuman = Math.round(deleteHuman_FirstDay);
         dataDay.deleteHumanDay = 0;
         
@@ -311,7 +415,9 @@ function calclDailyData(data, allDayRule, dailyData ) {
     }else{
         dataDay.sains = Math.round(data.popTotal - previusDay.deleteHuman - previusDay.remis - previusDay.malades); 
         dataDay.malades = Math.round(previusDay.malades + ( previusDay.malades * data.nombre_contacts * data.proba_contagion * ( previusDay.sains / data.popTotal )) - (( 1 / data.infection_duration ) * previusDay.malades ) - ((data.death_rate / data.infection_duration ) * previusDay.malades ));
+        dataDay.maladesDay = dataDay.malades - previusDay.malades;
         dataDay.remis = Math.round(previusDay.remis + 1 / data.infection_duration * previusDay.malades);
+        dataDay.remisDay = dataDay.remis - previusDay.remis;
         dataDay.deleteHuman = Math.round(previusDay.deleteHuman + (( data.death_rate / data.infection_duration ) * previusDay.malades )); 
         dataDay.deleteHumanDay = dataDay.deleteHuman - previusDay.deleteHuman;
 
