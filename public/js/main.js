@@ -219,24 +219,55 @@ function mainBrain(){
         data: {
             labels: dataGraphNbMalade.label,
             datasets: [
-            {
-                data: dataGraphNbMalade.data,
-                label: "Nombre de malade total",
-                borderColor: "#f06292",
-                fill: false
-            },
-            {
-                data: dataGraphNbSains.data,
-                label: "Nombre de sains total",
-                borderColor: "#039be5",
-                fill: false
-            },
-            {
-                data: dataGraphNbRemis.data,
-                label: "Nombre de Remis total",
-                borderColor: "#81c784",
-                fill: false
-            }
+                {
+                    data: dataGraphNbMalade.data,
+                    categoryPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    backgroundColor: "#f06292",
+                    hoverBackgroundColor : "#f06292",
+                    label: "Nombre de Malade / Jour",
+                },
+                {
+                    data: dataGraphNbSains.data,
+                    categoryPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    backgroundColor: "#039be5",
+                    hoverBackgroundColor : "#039be5",
+                    label: "Nombre de Sains / Jour",
+                },
+                {
+                    data: dataGraphNbRemis.data,
+                    categoryPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    backgroundColor: "#81c784",
+                    hoverBackgroundColor : "#81c784",
+                    label: "Nombre de Remis / Jour",
+                }
+
+            // {
+            //     data: dataGraphNbMalade.data,
+            //     label: "Nombre de malade total",
+            //     borderColor: "#f06292",
+            //     fill: false
+            // },
+            // {
+            //     data: dataGraphNbSains.data,
+            //     label: "Nombre de sains total",
+            //     borderColor: "#039be5",
+            //     fill: false
+            // },
+            // {
+            //     data: dataGraphNbRemis.data,
+            //     label: "Nombre de Remis total",
+            //     borderColor: "#81c784",
+            //     fill: false
+            // }
             // , { 
             //     data: [168,170,178,190,203,276,408,547,675,734],
             //     label: "Europe",
