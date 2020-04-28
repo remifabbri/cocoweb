@@ -275,6 +275,16 @@ function mainBrain(){
             //     fill: false
             // }
             ]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
         }
         // options: {
         //     title: {
