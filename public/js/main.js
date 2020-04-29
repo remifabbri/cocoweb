@@ -740,12 +740,28 @@ function creatorData(){
             currentData.rules.rule2 = true; 
             currentData.rules.rule3 = true; 
             currentData.rules.rule5 = true; 
-            currentData.rules.rule6 = true; 
+            currentData.rules.rule6 = true;
+            if(j=45){
+                currentData.checkHandleRules.rule1 = true; 
+                currentData.checkHandleRules.rule2 = true; 
+                currentData.checkHandleRules.rule3 = true; 
+                currentData.checkHandleRules.rule5 = true; 
+                currentData.checkHandleRules.rule6 = true;
+                currentData.setRuleDay = true; 
+            }
+            
         }else if( j>=106){
             currentData.rules.rule1 = true; 
             currentData.rules.rule4 = true; 
             currentData.rules.rule5 = true; 
             currentData.rules.rule6 = true;
+            if(j=106){
+                currentData.checkHandleRules.rule1 = true; 
+                currentData.checkHandleRules.rule4 = true; 
+                currentData.checkHandleRules.rule5 = true; 
+                currentData.checkHandleRules.rule6 = true;
+                currentData.setRuleDay = true; 
+            }   
         }
 
         allDayRule = {

@@ -95,6 +95,9 @@ input{
   font-size: bold !important;
   color: white !important; 
 }
+.btnSubmitFR:hover{
+  background-color: salmon;
+}
 
 #tableCalendar{
   display: flex; 
