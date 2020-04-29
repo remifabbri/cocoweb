@@ -144,38 +144,6 @@ function mainBrain() {
     chartNbMort.getContext('2d');
     containerCharts.append(chartNbMort);
 
-    // new Chart(chartNbMort, {
-    //     type: 'line',
-    //     data: {
-    //         labels: dataGraphNbMortJour.label,
-    //         datasets: [{ 
-    //             data: dataGraphNbMortJour.data,
-    //             label: "Nombre de morts / Jours",
-    //             borderColor: "#3e95cd",
-    //             fill: false
-    //         },
-    //         {
-    //             data: dataGraphNbMalade.data,
-    //             label: "Nombre de malade total",
-    //             borderColor: "#8e5ea2",
-    //             fill: false
-    //         }
-    //         // , { 
-    //         //     data: [168,170,178,190,203,276,408,547,675,734],
-    //         //     label: "Europe",
-    //         //     borderColor: "#3cba9f",
-    //         //     fill: false
-    //         // }
-    //         ]
-    //     }
-    //     // options: {
-    //     //     title: {
-    //     //     display: true,
-    //     //     text: 'World population per region (in millions)'
-    //     //     }
-    //     // }
-    // });
-
     new Chart(chartNbMort, {
         type: 'line',
         data: {
@@ -238,14 +206,35 @@ function mainBrain() {
 
 
 
-// 
-
 
 function calclDailyData(data, allDayRule, dailyData) {
     let dataDay = {};
     let previusDay = dailyData[dailyData.length - 1];
 
     if (i !== 0 && i !== 1) {
+        // for(var r=1; r<6; r++ ){
+        //     if (allDayRule[i].rules[`rule${r}`] !== allDayRule[i - 1].rules[`rule${r}`]) {
+        //         checkPeriodeRule[`rule${r}`].waitUpdate = true;
+        //     }
+    
+        //     if (allDayRule[i].rules[`rule${r}`]) {
+        //         checkPeriodeRule[`rule${r}`].count++;
+        //     } else {
+        //         checkPeriodeRule[`rule${r}`].count = 0;
+        //     }
+    
+        //     if (checkPeriodeRule[`rule${r}`].waitUpdate && checkPeriodeRule[`rule${r}`].count >= 7) {
+        //         data.nombre_contacts = data.nombre_contacts - 4
+        //         checkPeriodeRule[`rule${r}`].waitUpdate = false;
+        //     }
+        //     if (checkPeriodeRule[`rule${r}`].waitUpdate && checkPeriodeRule[`rule${r}`].count === 0) {
+        //         data.nombre_contacts = data.nombre_contacts + 4
+        //         checkPeriodeRule[`rule${r}`].waitUpdate = false;
+        //     }
+        //     console.log('ok', new Date());
+        // }
+
+
         // rule 1
         if (allDayRule[i].rules.rule1 !== allDayRule[i - 1].rules.rule1) {
             checkPeriodeRule.rule1.waitUpdate = true;
@@ -698,7 +687,7 @@ function manageBtnModal(j, CONFIG_DAY, bodyModal) {
 
 function creatorData(){
 
-    for (let j = 1; j < 365; j++) {
+    for (let jc = 1; jc < 365; jc++) {
 
         let currentData = {
             rules:{
@@ -735,13 +724,13 @@ function creatorData(){
             setRuleDay:false
         }
 
-        if(j >= 45 && j<106){
+        if(jc >= 45 && jc<106){
             currentData.rules.rule1 = true; 
             currentData.rules.rule2 = true; 
             currentData.rules.rule3 = true; 
             currentData.rules.rule5 = true; 
             currentData.rules.rule6 = true;
-            if(j=45){
+            if(jc === 45){
                 currentData.checkHandleRules.rule1 = true; 
                 currentData.checkHandleRules.rule2 = true; 
                 currentData.checkHandleRules.rule3 = true; 
@@ -750,12 +739,12 @@ function creatorData(){
                 currentData.setRuleDay = true; 
             }
             
-        }else if( j>=106){
+        }else if( jc>=106){
             currentData.rules.rule1 = true; 
             currentData.rules.rule4 = true; 
             currentData.rules.rule5 = true; 
             currentData.rules.rule6 = true;
-            if(j=106){
+            if(jc === 106){
                 currentData.checkHandleRules.rule1 = true; 
                 currentData.checkHandleRules.rule4 = true; 
                 currentData.checkHandleRules.rule5 = true; 
@@ -766,7 +755,8 @@ function creatorData(){
 
         allDayRule = {
             ...allDayRule, 
-            [j] : currentData 
+            [jc] : currentData 
         }
+        console.log('for update creator allDayRule', jc, allDayRule); 
     }
 }
