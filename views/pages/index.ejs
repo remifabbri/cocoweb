@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <head>
   <% include ../partials/header.ejs %>
@@ -15,7 +16,7 @@
       </a> -->
       <h2>Estimation de la propagation du Covid-19 - Vulgarisation</h2>
       <p></p>
-      
+      <input type="button" id='btnSubmitFR' value="Paramêtrer le calendrier avec les mesures appliquées en France" class="btnSubmitFR" >
       <div class="modelisation">
 
         <div class="j0">
@@ -58,18 +59,14 @@
         </div>
 
         <div id=tableCalendar></div>
-        
-          
 
-        
-          <!-- <label>Nombre de mort = </label>
-          <p id="total_death"></p> -->
       </div>
-      <input type="button" id='btnSubmit' value="SUBMIT" class="btnSubmit" >
+      <input type="button" id='btnSubmit' value="Lancer l'estimation" class="btnSubmit" >
+      
       <div class="BlockR0">R0 = <span id="R0"></span></div>
-   
+    
   </div>
-  
+    
   <div class="containerCharts">
     <canvas id="chartNbMort" width="400" height="400"></canvas>
     <canvas id="chartNbMaldade" width="400" height="400"></canvas>
@@ -79,12 +76,14 @@
     <div id="modal">
       
     </div>  
-  <div>
+  </div>
 
-  <!-- <script src="jsGraphDisplay.1.0.js"></script> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-  <script src="js/chart.js"></script>
-  <script src="js/main.js"></script>
+    <!-- <script src="jsGraphDisplay.1.0.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="js/chart.js"></script>
+    <script src="js/main.js"></script>
 
   </body>
+
+  
 </html>
