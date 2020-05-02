@@ -47,6 +47,29 @@ btnSubmitFR.addEventListener('click', function () {
 constructCalendar();
 
 
+let btnCloseIntro = document.querySelector('.btnCloseIntro'); 
+let sectionModalintro = document.querySelector('#SectionModalIntro');
+btnCloseIntro.addEventListener('click', () => {
+    sectionModalintro.removeAttribute('class', 'OpenModal');
+    sectionModalintro.setAttribute('class', 'CloseModal');
+})
+
+let navBtnIntrocduction = document.querySelector('#ModalIntroduction'); 
+navBtnIntrocduction.addEventListener("click", (e) =>{
+    sectionModalintro.removeAttribute('class', 'CloseModal');
+    sectionModalintro.setAttribute('class', 'OpenModal'); 
+});
+
+let modalIntro = document.querySelector('#modalIntro');
+sectionModalintro.addEventListener("click", (e) =>{
+    let isClickInside = modalIntro.contains(event.target); 
+    if(!isClickInside){
+        sectionModalintro.removeAttribute('class', 'OpenModal'); 
+        sectionModalintro.setAttribute('class', 'CloseModal');
+    }
+});
+
+
 
 function mainBrain() {
     let data = collectDataForm();
@@ -94,6 +117,10 @@ function mainBrain() {
         label: [],
         data: []
     };
+    let dataGraphR0 = {
+        label: [],
+        data: []
+    };
 
 
     console.log(dailyData);
@@ -125,6 +152,10 @@ function mainBrain() {
         dataGraphNbMaladeJour.label.push(indexDaily * 1),
             dataGraphNbMaladeJour.data.push(dailyData[indexDaily].maladesDay)
     }
+    for (let indexDaily in dailyData) {
+        dataGraphR0.label.push(indexDaily * 1),
+        dataGraphR0.data.push(dailyData[indexDaily].R0)
+    }
 
 
 
@@ -138,12 +169,36 @@ function mainBrain() {
         childContainer = containerCharts.lastElementChild;
     }
 
+    let chartR0 = document.createElement('canvas');
+    chartR0.setAttribute('id', 'chartR0');
+    chartR0.getContext('2d');
+    containerCharts.append(chartR0);
+    new Chart(chartR0, {
+        type: 'line',
+        data: {
+            labels: dataGraphR0.label,
+            datasets: [
+                {
+                    label: "R0 / Jour",
+                    data: dataGraphR0.data,
+                    borderColor: "#f06292",
+                    fill: false
+                }
+            ]
+        },
+        // options: {
+        //     title: {
+        //     display: true,
+        //     text: 'World population per region (in millions)'
+        //     }
+        // }
+    });
+
 
     let chartNbMort = document.createElement('canvas');
     chartNbMort.setAttribute('id', 'chartNbMort');
     chartNbMort.getContext('2d');
     containerCharts.append(chartNbMort);
-
     new Chart(chartNbMort, {
         type: 'line',
         data: {
@@ -381,7 +436,7 @@ function calclDailyData(data, allDayRule, dailyData) {
         dataDay.remis = 0;
         dataDay.deleteHuman = Math.round(deleteHuman_FirstDay);
         dataDay.deleteHumanDay = 0;
-
+        dataDay.R0 = R0;
         dailyData.push(dataDay);
     } else {
         dataDay.sains = Math.round(data.popTotal - previusDay.deleteHuman - previusDay.remis - previusDay.malades);
@@ -391,7 +446,7 @@ function calclDailyData(data, allDayRule, dailyData) {
         dataDay.remisDay = dataDay.remis - previusDay.remis;
         dataDay.deleteHuman = Math.round(previusDay.deleteHuman + ((data.death_rate / data.infection_duration) * previusDay.malades));
         dataDay.deleteHumanDay = dataDay.deleteHuman - previusDay.deleteHuman;
-
+        dataDay.R0 = R0; 
         dailyData.push(dataDay);
     }
 }

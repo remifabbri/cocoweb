@@ -62,12 +62,15 @@
 
       </div>
       <input type="button" id='btnSubmit' value="Lancer l'estimation" class="btnSubmit" >
-      
-      <div class="BlockR0">R0 = <span id="R0"></span></div>
+      <div class="posR0">
+        <div class="BlockR0">R0 = <span id="R0"></span></div>
+        <div class="BlockR0Q">Qu'est ce que le R0 ?</div>
+      </div>
     
   </div>
     
   <div class="containerCharts">
+    <canvas id="chartR0" width="400" height="400"></canvas>
     <canvas id="chartNbMort" width="400" height="400"></canvas>
     <canvas id="chartNbMaldade" width="400" height="400"></canvas>
   </div>
@@ -75,6 +78,19 @@
   <div id="SectionModal" class="SectionModal CloseModal">
     <div id="modal">
       
+    </div>  
+  </div>
+
+  <div id="SectionModalIntro" class="SectionModal">
+    <div id="modalIntro">
+      <h1>Mettez en place votre propre plan de Confinement / Déconfinement</h1>
+      <p>Pour cela vous pouvez choisir d'authoriser ou non les différents rassemblements qui sont ar défaut tous authorisés : </p>
+      <img src="/iconContact.PNG" class="responsiveImg">
+      <p>Choisissez également d'appliquer des mesures d'higiène qui par de féfaut ne sont pas appliquées : </p>
+      <img src="/iconhygiene.PNG" class="responsiveImg">
+      <p>Il suffit de choisir la date a laquelle commence ces mesures puis celles à laquelle elles se terminent : </p>
+      <img src="/iconCalendrier.PNG" class="responsiveImg">
+      <button class="btnCloseIntro">Commencer </button>
     </div>  
   </div>
 
