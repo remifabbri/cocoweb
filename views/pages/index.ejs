@@ -14,9 +14,13 @@
       <!-- <a href="/" class="lang-logo">
         <img src="/lang-logo.png">
       </a> -->
-      <h2>Estimation de la propagation du Covid-19 - Vulgarisation</h2>
+      <h1>Ramener la courbe à la maison <span>&#9996;</span></h1>
+      <span>Estimation de la propagation du Covid-19 - Vulgarisation</span>
       <p></p>
-      <input type="button" id='btnSubmitFR' value="Paramêtrer le calendrier avec les mesures appliquées en France" class="btnSubmitFR" >
+      <button type="button" id='btnSubmitFR' class="btnSubmitFR" >
+        <span class="jsb">Paramêtrer le calendrier avec les mesures appliquées en France</span>
+        <span class="jsp"> J-0 = 1<sup>er</sup> Février | J-45 = 17 Mars | J-100 = 11 Mai </span>
+      </button>
       <div class="modelisation">
 
         <div class="j0">
@@ -61,10 +65,11 @@
         <div id=tableCalendar></div>
 
       </div>
-      <input type="button" id='btnSubmit' value="Lancer l'estimation" class="btnSubmit" >
+      <button type="button" id='btnSubmit'  class="btnSubmit" >Lancer l'estimation <span class="glyphicon glyphicon-play"></span></button>
       <div class="posR0">
-        <div class="BlockR0">R0 = <span id="R0"></span></div>
-        <div class="BlockR0Q">Qu'est ce que le R0 ?</div>
+        <div class="BlockR0">R<SUB>0</SUB> = <span id="R0"></span></div>
+        <a href="https://fr.wikipedia.org/wiki/Nombre_de_reproduction_de_base" target="_blank" class="BlockR0Q">Qu'est ce que le R<SUB>0</SUB> ?</a>
+
       </div>
     
   </div>
@@ -87,10 +92,10 @@
       <p>Pour cela vous pouvez choisir d'authoriser ou non les différents rassemblements qui sont ar défaut tous authorisés : </p>
       <img src="/iconContact.PNG" class="responsiveImg">
       <p>Choisissez également d'appliquer des mesures d'higiène qui par de féfaut ne sont pas appliquées : </p>
-      <img src="/iconhygiene.PNG" class="responsiveImg">
+      <img src="/iconHygiene.PNG" class="responsiveImg">
       <p>Il suffit de choisir la date a laquelle commence ces mesures puis celles à laquelle elles se terminent : </p>
       <img src="/iconCalendrier.PNG" class="responsiveImg">
-      <button class="btnCloseIntro">Commencer </button>
+      <button class="btnCloseIntro">Commencer <span class="glyphicon glyphicon-play"></span></button> 
     </div>  
   </div>
 

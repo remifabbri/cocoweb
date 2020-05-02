@@ -169,31 +169,6 @@ function mainBrain() {
         childContainer = containerCharts.lastElementChild;
     }
 
-    let chartR0 = document.createElement('canvas');
-    chartR0.setAttribute('id', 'chartR0');
-    chartR0.getContext('2d');
-    containerCharts.append(chartR0);
-    new Chart(chartR0, {
-        type: 'line',
-        data: {
-            labels: dataGraphR0.label,
-            datasets: [
-                {
-                    label: "R0 / Jour",
-                    data: dataGraphR0.data,
-                    borderColor: "#f06292",
-                    fill: false
-                }
-            ]
-        },
-        // options: {
-        //     title: {
-        //     display: true,
-        //     text: 'World population per region (in millions)'
-        //     }
-        // }
-    });
-
 
     let chartNbMort = document.createElement('canvas');
     chartNbMort.setAttribute('id', 'chartNbMort');
@@ -207,6 +182,31 @@ function mainBrain() {
                 {
                     label: "Nombre de Mort / Jour",
                     data: dataGraphNbMortJour.data,
+                    borderColor: "#f06292",
+                    fill: false
+                }
+            ]
+        },
+        // options: {
+        //     title: {
+        //     display: true,
+        //     text: 'World population per region (in millions)'
+        //     }
+        // }
+    });
+
+    let chartR0 = document.createElement('canvas');
+    chartR0.setAttribute('id', 'chartR0');
+    chartR0.getContext('2d');
+    containerCharts.append(chartR0);
+    new Chart(chartR0, {
+        type: 'line',
+        data: {
+            labels: dataGraphR0.label,
+            datasets: [
+                {
+                    label: "R0 / Jour",
+                    data: dataGraphR0.data,
                     borderColor: "#f06292",
                     fill: false
                 }
@@ -779,7 +779,7 @@ function creatorData(){
             setRuleDay:false
         }
 
-        if(jc >= 45 && jc<106){
+        if(jc >= 45 && jc<100){
             currentData.rules.rule1 = true; 
             currentData.rules.rule2 = true; 
             currentData.rules.rule3 = true; 
@@ -794,12 +794,12 @@ function creatorData(){
                 currentData.setRuleDay = true; 
             }
             
-        }else if( jc>=106){
+        }else if( jc>=100){
             currentData.rules.rule1 = true; 
             currentData.rules.rule4 = true; 
             currentData.rules.rule5 = true; 
             currentData.rules.rule6 = true;
-            if(jc === 106){
+            if(jc === 100){
                 currentData.checkHandleRules.rule1 = true; 
                 currentData.checkHandleRules.rule4 = true; 
                 currentData.checkHandleRules.rule5 = true; 

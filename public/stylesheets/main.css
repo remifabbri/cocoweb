@@ -50,7 +50,7 @@ input{
 }
 
 .j0{
-  height:462px;
+  height:545px;
   width: 25%;
   border: 1px solid white;
 }
@@ -69,7 +69,6 @@ input{
   width: 75%;
 }
 
-
 .btnSubmit{ 
   margin-top: 20px;
   padding: 10px; 
@@ -85,16 +84,31 @@ input{
 }
 
 .btnSubmitFR{
+  display: flex; 
+  flex-flow: column nowrap;
+  align-items: center;
   margin-top: 20px;
   padding: 10px; 
   font-size: 20px;
-  border: none; 
+  border: none;
+  margin: 0 auto;
   border-radius: 5px;
   margin-bottom: 20px;
   background-color: rgba(0, 0, 0, 0.5); 
   font-size: bold !important;
-  color: white !important; 
+  color: white !important;
 }
+
+.jsb{
+  font-size: 20px !important; 
+}
+
+.jsp{
+  font-size: 16px !important; 
+  color: lightgrey; 
+}
+
+
 .btnSubmitFR:hover{
   background-color: salmon;
 }
@@ -104,7 +118,7 @@ input{
   flex-flow: row wrap; 
   justify-content: space-between;
   width: 50%; 
-  height : 466px;
+  height : 545px;
   overflow-y: scroll;
   padding: 5px; 
 
@@ -139,14 +153,17 @@ input{
   width: auto; 
   padding: 10px;
   font-size: 20px; 
-  background-color : cornflowerblue;
+  background-color : #9bb2da;
+  color:white; 
   border-radius: 5px;
   margin: 0 10px; 
 }
 
-.BlockR0Q:hover{
+.BlockR0Q:hover, .BlockR0Q:focus, .BlockR0Q:active{
   cursor: pointer;
   background-color: #365388;
+  color:white;
+  text-decoration: none; 
 }
 
 .containerCharts{
