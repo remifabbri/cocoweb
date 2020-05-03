@@ -192,8 +192,25 @@ function mainBrain() {
             legend: {
                 display: true,
                 labels: {
-                    fontSize: 30
+                    fontSize: 30,
+                    fontColor: "#FFF"
                 }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
             }
         }
     });
@@ -219,8 +236,37 @@ function mainBrain() {
             legend: {
                 display: true,
                 labels: {
-                    fontSize: 30
+                    fontSize: 30,
+                    fontColor: "#FFF"
                 }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    // scaleLabel: {
+                    //     display: true,
+                    //     labelString: 'X axe name',
+                    //     fontColor:'#FFF',
+                    //     fontSize:10
+                    // },
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
+                xAxes: [{
+                    display: true,
+                    // scaleLabel: {
+                    //     display: true,
+                    //     labelString: 'X axe name',
+                    //     fontColor:'#FFF',
+                    //     fontSize:10
+                    // },
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
             }
         }
         
@@ -260,8 +306,25 @@ function mainBrain() {
             legend: {
                 display: true,
                 labels: {
-                    fontSize: 30
+                    fontSize: 30,
+                    fontColor: "#FFF"
                 }
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        fontColor: "#e6e6e6",
+                        fontSize: 20
+                    }
+                }],
             }
         }
        
