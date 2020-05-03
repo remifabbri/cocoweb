@@ -182,7 +182,7 @@ function mainBrain() {
                 {
                     label: "Nombre de Mort / Jour",
                     data: dataGraphNbMortJour.data,
-                    borderColor: "#f06292",
+                    borderColor: "#f44336",
                     fill: false
                 }
             ]
@@ -210,7 +210,7 @@ function mainBrain() {
                 {
                     label: "R0 / Jour",
                     data: dataGraphR0.data,
-                    borderColor: "#f06292",
+                    borderColor: "#ba68c8",
                     fill: false
                 }
             ]
@@ -238,20 +238,20 @@ function mainBrain() {
             datasets: [
                 {
                     data: dataGraphNbMalade.data,
-                    label: "Nombre de malade total",
-                    borderColor: "#f06292",
+                    label: "Personnes Malades",
+                    borderColor: "#fdd835",
                     fill: false
                 },
                 {
                     data: dataGraphNbSains.data,
-                    label: "Nombre de sains total",
-                    borderColor: "#039be5",
+                    label: "Personnes Saines",
+                    borderColor: "#8bc34a",
                     fill: false
                 },
                 {
                     data: dataGraphNbRemis.data,
-                    label: "Nombre de Remis total",
-                    borderColor: "#81c784",
+                    label: "Personnes Rétablis",
+                    borderColor: "#2196f3",
                     fill: false
                 }
             ]
