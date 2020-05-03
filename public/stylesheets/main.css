@@ -54,7 +54,7 @@ input{
   width: 25%;
   border: 1px solid white;
 }
-@media (max-width: 950px){
+@media screen and (max-width: 950px){
   .j0{
     width: 30%;
   }
@@ -107,7 +107,6 @@ input{
   font-size: 16px !important; 
   color: lightgrey; 
 }
-
 
 .btnSubmitFR:hover{
   background-color: salmon;
@@ -235,7 +234,7 @@ input{
   border: 10px solid cornflowerblue;
 }
 
-#SectionModal, #SectionModalIntro{
+#SectionModal{
   position: fixed;
   top: 0; 
   left: 0;
@@ -244,7 +243,7 @@ input{
   background-color: rgba(0, 0, 0, 0.5); 
 }
 
-#modal, #modalIntro{
+#modal{
   position: absolute;
   top: 50%; 
   left: 50%;
@@ -353,6 +352,7 @@ input{
   background-color: seashell;
   border-radius: 10px;
   z-index: 100;
+  padding: 10px 50px; 
 }
 
 #modalIntro h1{
@@ -368,6 +368,7 @@ input{
   font-size : 20px;
   color: slategray;
   margin-top: 25px;
+
 }
 
 .btnCloseIntro{
@@ -389,10 +390,19 @@ input{
   background-color: salmon;
 }
 
+
+@media screen and (max-width: 950px){
+  .responsiveImg{
+    width : 60%; 
+    height: auto; 
+  }
+}
+
 .responsiveImg{
   width : 30%; 
   height: auto; 
 }
+
 
 .ModalIntroduction:hover{
   cursor: pointer !important;

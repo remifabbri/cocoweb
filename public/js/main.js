@@ -187,12 +187,15 @@ function mainBrain() {
                 }
             ]
         },
-        // options: {
-        //     title: {
-        //     display: true,
-        //     text: 'World population per region (in millions)'
-        //     }
-        // }
+        options: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    fontSize: '12'
+                }
+            }
+        }
     });
 
     let chartR0 = document.createElement('canvas');
