@@ -188,6 +188,14 @@ function mainBrain() {
             ]
         },
         responsive: true, 
+        options: {
+            legend: {
+                display: true,
+                labels: {
+                    fontSize: 30
+                }
+            }
+        }
     });
 
     let chartR0 = document.createElement('canvas');
@@ -207,12 +215,15 @@ function mainBrain() {
                 }
             ]
         },
-        // options: {
-        //     title: {
-        //     display: true,
-        //     text: 'World population per region (in millions)'
-        //     }
-        // }
+        options: {
+            legend: {
+                display: true,
+                labels: {
+                    fontSize: 30
+                }
+            }
+        }
+        
     });
 
     let chartNbMaldade = document.createElement('canvas');
@@ -244,13 +255,16 @@ function mainBrain() {
                     fill: false
                 }
             ]
+        },
+        options: {
+            legend: {
+                display: true,
+                labels: {
+                    fontSize: 30
+                }
+            }
         }
-        // options: {
-        //     title: {
-        //     display: true,
-        //     text: 'World population per region (in millions)'
-        //     }
-        // }
+       
     });
 }
 
