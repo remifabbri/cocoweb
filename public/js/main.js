@@ -187,15 +187,7 @@ function mainBrain() {
                 }
             ]
         },
-        options: {
-            legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                    fontSize: '12'
-                }
-            }
-        }
+        responsive: true, 
     });
 
     let chartR0 = document.createElement('canvas');

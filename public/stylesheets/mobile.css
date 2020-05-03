@@ -161,7 +161,11 @@
   
   .containerCharts{
     background-color: #222;
-    padding-top: 150px; 
+    padding: 100px 25px; 
+  }
+
+  .containerCharts canvas{
+    margin-bottom: 50px;
   }
   
   .bodyModal{
