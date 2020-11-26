@@ -112,6 +112,46 @@ input{
   background-color: salmon;
 }
 
+.defaultGT_Banner{
+  display: flex; 
+  flex-flow: row nowrap; 
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f8f8f8; 
+  color: #222;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  /* Change here for your font */
+  padding: 10px;
+}
+
+.defaultGT_Paragraphe{
+  text-align: center;
+  margin: 0; 
+}
+
+.defaultGT_Btn{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding : 5px;
+  border-radius: 2em;
+  border: 2px solid #cf9b64 !important;
+  color: #cf9b64 !important;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.defaultGT_Btn:hover{
+  background-color: #cf9b64 !important;
+  color: #ffffff !important;
+}
+
+.defaultGT_Btn:focus{
+  background-color: #cf9b64 !important;
+  color: #ffffff !important;
+}
+
+
 #tableCalendar{
   display: flex; 
   flex-flow: row wrap; 
